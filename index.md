@@ -564,12 +564,12 @@ const pageRef = useRef()
 | customizeOptionsLabelKey  | 自定义 options 中 的label字段  | String  | false  | label  |
 | customizeOptionsChildrenKey  | 自定义 options 中 的children字段  | String  | false  | children  |
 
-### 页面增加按钮权限
+### 页面 && 表格 增加按钮权限
 
 ```javascript
 
   if (pageConfig.pageTableConfig) {
-    // 表格增加按钮权限 pageAuthorityArr来源于点击导航派发到页面对应的按钮权限数组
+    // 页面 && 表格按钮权限 pageAuthorityArr来源于点击导航派发到页面对应的按钮权限数组
     pageConfig.pageTableConfig.pageAuthorityArr = pageAuthorityArr
   }
   
