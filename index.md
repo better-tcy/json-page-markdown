@@ -462,8 +462,8 @@ export default OneOne
 | 属性  | 说明  | 类型  | 是否必填  | 默认值  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | width  | 弹窗宽度  | Number  | false  | 560  |
-| labelCol  | 表单label标签布局 详见antd官网  | Object  | false  | { offset: 0, span: 6 }  |
-| wrapperCol  | 需要为输入控件设置布局样式时 使用该属性，用法同 labelCol 详见antd官网  | Object  | false  | { offset: 1, span: 10 }  |
+| labelCol  | 弹窗中表单label标签布局 详见antd官网  | Object  | false  | { offset: 0, span: 6 }  |
+| wrapperCol  | 弹窗表单中需要为输入控件设置布局样式时 使用该属性，用法同 labelCol 详见antd官网  | Object  | false  | { offset: 1, span: 12 }  |
 | layout  | 表单布局 可选值 horizontal  vertical  inline  | String  | false  | horizontal  |
 | maskClosable  | 点击蒙层是否允许关闭  | Boolean  | false  | true  |
 | okText  | 确认按钮文字  | String  | false  | 确定  |
