@@ -1,10 +1,13 @@
 ##  介绍
+
 **这是一个可以通过JSON配置就可生成页面的组件，可具有更高的开发便捷性即维护性。**
 
 ## 为什么要做这个组件？
+
 **在大多数的B端项目开发中，很多表格及表单页面大致相同，而前端开发编写一个页面需要大量的功能代码及业务代码 而且如果不封装的情况下很难做到复用性(复制粘贴修改部分代码 确实可以复用 但是抛开优雅度不说，维护时会发现成本很高 每个被粘贴的文件都需要手动去改)所以配置生成页面这个组件 应运而生。**
 
 ## 这个组件有什么好处
+
 我们先来看两张图片
 
 [![react_cms_image1](https://github.com/Betteryourself-tcy/images/blob/master/show_cms_image1.png?raw=true "react_cms_image1")](https://github.com/Betteryourself-tcy/images/blob/master/show_cms_image1.png?raw=true "react_cms_image1")
@@ -30,6 +33,7 @@
 ## 配置示例代码
 
 ```javascript
+
 import React, { memo, useRef } from 'react'
 
 import { Button, Tag } from 'antd'
@@ -408,7 +412,13 @@ export default OneOne
 [![react_cms_config_image2](https://github.com/Betteryourself-tcy/images/blob/master/show_cms_config_image2.png?raw=true "react_cms_config_image2")](https://github.com/Betteryourself-tcy/images/blob/master/show_cms_config_image2.png?raw=true "react_cms_config_image2")
 
 
-## API
+## 代码详解
+
+### 创建ref 用于调用子组件方法
+```javascript
+const pageRef = useRef()
+```
+
 ### pageConfig
 
 | 属性  | 说明  | 类型  | 是否必填  | 默认值  |
@@ -471,6 +481,7 @@ export default OneOne
 | modalItemArr  | 弹窗中每一项组成的数组  | Object[]  | true  | ——  |
 
 ### searchItemArr && modalItemArr -> Object
+
 **（一个type对应一个属性配置表 虽会有重复属性解释 但是方便阅读）**
 
 **通用属性**
@@ -554,27 +565,53 @@ export default OneOne
 | customizeOptionsChildrenKey  | 自定义 options 中 的children字段  | String  | false  | children  |
 
 ### 页面增加按钮权限
+
 ```javascript
+
   if (pageConfig.pageTableConfig) {
     // 表格增加按钮权限 pageAuthorityArr来源于点击导航派发到页面对应的按钮权限数组
     pageConfig.pageTableConfig.pageAuthorityArr = pageAuthorityArr
   }
+  
 ```
 
 ### 添加其他按钮
-```javascript
-  if (pageConfig.pageTableConfig) {
-    // 表格中其他按钮
-    pageConfig.pageTableConfig.tableMoreButtonArr = [tableBtn1()]
 
-    // Page页中其他按钮
-    pageConfig.pageTableConfig.pageMoreButtonArr = [pageBtn1()]
+**页面中其他按钮的回调函数**
+
+```javascript
+
+  const pageBtn1ClickFun = (tableSelectedRowKeys) => {
+    console.log('表格中多选选中的数据', tableSelectedRowKeys)
+
+    // 业务逻辑
+
+    // 更新表格数据
+    pageRef.current.getTableData()
   }
+  
+```
+
+**表格中其他按钮的回调函数**
+
+```javascript
+
+  const tableBtn1ClickFun = (record) => {
+    console.log('行信息', record)
+
+    // 业务逻辑
+
+    // 更新表格数据
+    pageRef.current.getTableData()
+  }
+  
 ```
 
 **页面中其他按钮**
+
 ```javascript
-  function pageBtn1 () {
+
+  const pageBtn1 = () => {
     // Page页其他按钮的权限 如果按钮权限数组pageAuthorityArr中存在'其他按钮'则显示此按钮
     if (btnAuthority(pageAuthorityArr, '其他按钮')) {
       return function (tableSelectedRowKeys) {
@@ -592,11 +629,14 @@ export default OneOne
       }
     }
   }
+  
 ```
 
 **表格中其他按钮**
+
 ```javascript
-  function tableBtn1 () {
+
+  const tableBtn1 = () => {
     // 表格中其他按钮的权限 可结合src\assets\data\menuData.js中数据 梳理逻辑
     if (btnAuthority(pageAuthorityArr, '其他按钮')) {
       return function (record) {
@@ -616,42 +656,29 @@ export default OneOne
       }
     }
   }
+  
 ```
 
-**页面中其他按钮的回调函数**
 ```javascript
-  function pageBtn1ClickFun (tableSelectedRowKeys) {
-    console.log('表格中多选选中的数据', tableSelectedRowKeys)
 
-    // 业务逻辑
-
-    // 更新表格数据
-    pageRef.current.getTableData()
+  if (pageConfig.pageTableConfig) {
+    // Page页中其他按钮
+    pageConfig.pageTableConfig.pageMoreButtonArr = [pageBtn1()]
+  
+    // 表格中其他按钮
+    pageConfig.pageTableConfig.tableMoreButtonArr = [tableBtn1()]
   }
-```
-
-**表格中其他按钮的回调函数**
-```javascript
-  function tableBtn1ClickFun (record) {
-    console.log('行信息', record)
-
-    // 业务逻辑
-
-    // 更新表格数据
-    pageRef.current.getTableData()
-  }
-```
-
-### 创建ref 用于调用子组件方法
-```javascript
-const pageRef = useRef()
+  
 ```
 
 ## 使用组件
+
 ```javascript
+
   return (
     <div>
       <Page onRef={pageRef} pageConfig={pageConfig}></Page>
     </div>
   )
+  
 ```
