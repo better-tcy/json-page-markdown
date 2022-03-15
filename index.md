@@ -461,6 +461,7 @@ const pageRef = useRef()
 | isShowEnableDisableBtn  | 是否显示启用禁用按钮  | Boolean  | false  | true  |
 | isShowEnableDisableBtn  | 是否显示启用禁用按钮  | Boolean  | false  | true  |
 | isShowActionColumns  | 是否显示操作列  | Boolean  | false  | true  |
+| actionColumnsWidth  | 操作列的宽度，如果表格列数较多，请给每个列添加宽度（columns中的每一项增加width属性）这样表格会增加横向滚动条，操作列悬浮固定在右侧  | Number  | false  | 500  |
 | columns  | 表格列的配置描述 详见antd官网  | ColumnsType[]  | true  | ——  |
 | accordingRowIsRenderCheckBtn  | 根据行数据 是否渲染 查看按钮  | (record) => boolean  | false  | () => true  |
 | accordingRowIsRenderUpdateBtn  | 根据行数据 是否渲染 修改按钮  | 	(record) => boolean  | false  | () => true |
