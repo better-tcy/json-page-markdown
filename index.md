@@ -43,13 +43,14 @@ import Page from '@/component/business-components/page/Page'
 import { btnAuthority } from 'page/utils'
 
 const OneOne = memo((props) => {
-  
   // pageAuthorityArr来源于点击导航派发到页面对应的按钮权限数组
   const { pageAuthorityArr } = props.location.state
 
+  const pageRef = useRef()
+
   const pageConfig = {
     pageRequestUrl: {
-      curdUrl: '/oneOne',
+      curdUrl: '/oneOne'
       // enableUrl: '/oneOne/start', // 默认值/oneOne/start
       // disabledUrl: '/oneOne/stop' // 默认值/oneOne/stop
     },
@@ -70,7 +71,7 @@ const OneOne = memo((props) => {
           label: '手机号',
           field: 'phone',
           placeholder: '请输入手机号'
-        },
+        }
       ]
     },
     pageTableConfig: {
@@ -80,6 +81,7 @@ const OneOne = memo((props) => {
       // isShowRemoveBtn: false,
       // isShowEnableDisableBtn: false,
       // isShowActionColumns: false,
+      // actionColumnsWidth: 500, // 操作列的宽度 默认为500 如果表格列数较多，请给每个列添加宽度（columns中的每一项增加width属性）这样表格会增加横向滚动条，操作列悬浮固定在右侧
       columns: [
         {
           title: '角色名称',
@@ -132,8 +134,8 @@ const OneOne = memo((props) => {
     },
     pageModalConfig: {
       // width: 500, // 弹窗宽度 默认为560
-      // labelCol:{}, // 详见antd 官网
-      // wrapperCol:{},// 详见antd 官网
+      // labelCol:{}, // 弹窗中表单label标签布局 详见antd官网 默认值 { offset: 0, span: 6 }
+      // wrapperCol:{},// 弹窗表单中需要为输入控件设置布局样式时 使用该属性，用法同 labelCol 详见antd官网 默认值 { offset: 1, span: 12 }
       // layout:'' // 表单布局 可选值 horizontal | vertical | inline, 默认值为horizontal
       // maskClosable: false, // 点击蒙层是否允许关闭 默认为true
       // okText:'完成' // 确认按钮文字 默认为确定
@@ -320,8 +322,17 @@ const OneOne = memo((props) => {
   }
 
   if (pageConfig.pageTableConfig) {
-    // 页面增加按钮权限 pageAuthorityArr来源于点击导航派发到页面对应的按钮权限数组
+    // 页面 && 表格按钮权限 pageAuthorityArr来源于点击导航派发到页面对应的按钮权限数组
     pageConfig.pageTableConfig.pageAuthorityArr = pageAuthorityArr
+  }
+
+  const pageBtn1ClickFun = (tableSelectedRowKeys) => {
+    console.log('表格中多选选中的数据', tableSelectedRowKeys)
+
+    // 业务逻辑
+
+    // 更新表格数据
+    // pageRef.current.getTableData()
   }
 
   const tableBtn1ClickFun = (record) => {
@@ -334,40 +345,11 @@ const OneOne = memo((props) => {
     pageRef.current.getTableData()
   }
 
-  const pageBtn1ClickFun = (tableSelectedRowKeys) => {
-    console.log('表格中多选选中的数据', tableSelectedRowKeys)
-
-    // 业务逻辑
-
-    // 更新表格数据
-    // pageRef.current.getTableData()
-  }
-
-  const tableBtn1 = () => {
-    // 表格中其他按钮的权限 可结合src\assets\data\menuData.js中数据 梳理逻辑
-    if (btnAuthority(pageAuthorityArr, '其他按钮')) {
-      return function (record) {
-        // 如果'其他按钮'和行信息有权限关联 可拿到record判断 是否返回按钮
-        return (
-          <Button
-            key={1}
-            type="text"
-            style={{ color: 'rgb(250, 152, 35)' }}
-            onClick={() => {
-              tableBtn1ClickFun(record)
-            }}
-          >
-            其他按钮
-          </Button>
-        )
-      }
-    }
-  }
-
   const pageBtn1 = () => {
     // Page页其他按钮的权限 如果按钮权限数组pageAuthorityArr中存在'其他按钮'则显示此按钮
     if (btnAuthority(pageAuthorityArr, '其他按钮')) {
       return function (tableSelectedRowKeys) {
+        // 返回的按钮 必须添加key属性
         return (
           <Button
             key={1}
@@ -383,16 +365,36 @@ const OneOne = memo((props) => {
     }
   }
 
-  // 添加其他按钮
-  if (pageConfig.pageTableConfig) {
-    // 表格中其他按钮
-    pageConfig.pageTableConfig.tableMoreButtonArr = [tableBtn1()]
-
-    // Page页中其他按钮
-    pageConfig.pageTableConfig.pageMoreButtonArr = [pageBtn1()]
+  const tableBtn1 = () => {
+    // 表格中其他按钮的权限 可结合src\assets\data\menuData.js中数据 梳理逻辑
+    if (btnAuthority(pageAuthorityArr, '其他按钮')) {
+      return function (record) {
+        // 如果'其他按钮'和行信息有权限关联 可拿到record判断 是否返回按钮
+        // 返回的按钮 必须添加key属性 table中的其他按钮最好使用字符串作为key值 避免和组件内部按钮key冲突
+        return (
+          <Button
+            key={'a'}
+            type="text"
+            style={{ color: 'rgb(250, 152, 35)' }}
+            onClick={() => {
+              tableBtn1ClickFun(record)
+            }}
+          >
+            其他按钮
+          </Button>
+        )
+      }
+    }
   }
 
-  const pageRef = useRef()
+  // 添加其他按钮
+  if (pageConfig.pageTableConfig) {
+    // Page页中其他按钮
+    pageConfig.pageTableConfig.pageMoreButtonArr = [pageBtn1()]
+
+    // 表格中其他按钮
+    pageConfig.pageTableConfig.tableMoreButtonArr = [tableBtn1()]
+  }
 
   return (
     <div>
