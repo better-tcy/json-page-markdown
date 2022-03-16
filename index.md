@@ -535,8 +535,8 @@ const pageRef = useRef()
 
 | 属性  | 说明  | 类型  | 是否必填  | 默认值  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| format  | 	展示的日期格式 详见antd官网  | String  | false  | 时间戳  |
-| showTime  | 	展示的日期格式 详见antd官网  | String  | false  | 时间戳  |
+| format  | 展示的日期格式 详见antd官网  | String  | false  | 时间戳  |
+| showTime  | 增加时间选择功能  | Boolean  | false  | false  |
 | placeholder  | 站位文本  | String  | false  | datePicker->请选择日期；rangePicker->['开始日期','结束日期']   |
 
 **type = upload**
