@@ -50,7 +50,16 @@ const OneOne = memo((props) => {
 
   const pageConfig = {
     pageRequestUrl: {
-      curdUrl: '/oneOne'
+      curdUrl: '/oneOne',
+      getMoreParams: {
+        type: 1
+      },
+      postMoreParams: {
+        type: 1
+      },
+      putMoreParams: {
+        type: 1
+      }
       // enableUrl: '/oneOne/start', // 默认值/oneOne/start
       // disabledUrl: '/oneOne/stop' // 默认值/oneOne/stop
     },
