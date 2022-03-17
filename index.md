@@ -150,19 +150,27 @@ const OneOne = memo((props) => {
           rules: [{ required: true, message: '请输入姓名' }]
         },
         {
+          type: 'input',
+          label: '手机号',
+          field: 'phone',
+          placeholder: '请输入手机号',
+          isNumber: true, // 是否是数字输入框 默认为false
+          rules: [{ required: true, message: '请输入手机号' }]
+        },
+        {
           type: 'password',
           label: '密码',
           field: 'password',
           placeholder: '请输入密码',
+          isNumber: true, // 是否是数字输入框 默认为false
           rules: []
         },
         {
           type: 'select',
           label: '选择水果',
-          mode: '', // 设置 Select 的模式为多选或标签 可选值为 multiple | tags，不传为单选
           field: 'fruit',
           placeholder: '请选择水果',
-          rules: [],
+          mode: '', // 设置 Select 的模式为多选或标签 可选值为 multiple | tags，不传为单选
           customizeOptionsValueKey: 'id', // 自定义options中value字段  默认为value
           customizeOptionsLabelKey: 'name', // 自定义options中label字段 默认为label
           options: [
@@ -174,7 +182,8 @@ const OneOne = memo((props) => {
               name: '香蕉',
               id: 2
             }
-          ]
+          ],
+          rules: []
         },
         {
           type: 'radio',
@@ -182,7 +191,6 @@ const OneOne = memo((props) => {
           field: 'radioVal',
           customizeOptionsValueKey: 'id', // 默认为value
           customizeOptionsLabelKey: 'name', // 默认为label
-          rules: [],
           options: [
             {
               id: 1,
@@ -192,7 +200,8 @@ const OneOne = memo((props) => {
               id: 2,
               name: '女'
             }
-          ]
+          ],
+          rules: []
         },
         {
           type: 'checkbox',
@@ -200,7 +209,6 @@ const OneOne = memo((props) => {
           field: 'checkboxVal',
           customizeOptionsValueKey: 'id', // 默认为value
           customizeOptionsLabelKey: 'name', // 默认为label
-          rules: [],
           options: [
             {
               id: 1,
@@ -210,7 +218,8 @@ const OneOne = memo((props) => {
               id: 2,
               name: '吉利'
             }
-          ]
+          ],
+          rules: []
         },
         {
           type: 'tree',
@@ -219,7 +228,6 @@ const OneOne = memo((props) => {
           customizeOptionsValueKey: 'id', // 默认为value
           customizeOptionsLabelKey: 'name', // 默认为label
           customizeOptionsChildrenKey: 'children', // 默认为children
-          rules: [],
           options: [
             {
               id: 1,
@@ -233,7 +241,8 @@ const OneOne = memo((props) => {
                 }
               ]
             }
-          ]
+          ],
+          rules: []
         },
         {
           type: 'datePicker',
@@ -281,7 +290,6 @@ const OneOne = memo((props) => {
           // customizeOptionsValueKey: 'id', // 默认为value
           // customizeOptionsLabelKey: 'name', // 默认为label
           // customizeOptionsChildrenKey:'child' // 默认为children
-          rules: [],
           options: [
             {
               label: '前端',
@@ -315,7 +323,8 @@ const OneOne = memo((props) => {
                 }
               ]
             }
-          ]
+          ],
+          rules: []
         }
       ]
     }
@@ -502,13 +511,14 @@ const pageRef = useRef()
 | 属性  | 说明  | 类型  | 是否必填  | 默认值  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | placeholder  | 站位文本  | String  | false  | 请输入内容  |
+| isNumber  | 是否为数字输入框  | Boolean  | false  | false  |
 
 **type = select**
 
 | 属性  | 说明  | 类型  | 是否必填  | 默认值  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-| mode  | 设置 Select 的模式为多选或标签 可选值为 multiple  tags 不传为单选  | String  | false  | ''  |
 | placeholder  | 站位文本  | String  | false  | 请选择内容  |
+| mode  | 设置 Select 的模式为多选或标签 可选值为 multiple  tags 不传为单选  | String  | false  | ''  |
 | customizeOptionsValueKey  | 自定义 options 中 的value字段  | String  | false  | value  |
 | customizeOptionsLabelKey  | 自定义 options 中 的label字段  | String  | false  | label  |
 | options  | 数据源  | Object[]  | true  | ——  |
@@ -535,9 +545,9 @@ const pageRef = useRef()
 
 | 属性  | 说明  | 类型  | 是否必填  | 默认值  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
+| placeholder  | 站位文本  | String  | false  | datePicker->请选择日期；rangePicker->['开始日期','结束日期']  |
 | format  | 展示的日期格式 详见antd官网  | String  | false  | 时间戳  |
 | showTime  | 增加时间选择功能  | Boolean  | false  | false  |
-| placeholder  | 站位文本  | String  | false  | datePicker->请选择日期；rangePicker->['开始日期','结束日期']   |
 
 **type = upload**
 
@@ -553,6 +563,7 @@ const pageRef = useRef()
 
 | 属性  | 说明  | 类型  | 是否必填  | 默认值  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
+| placeholder  | 站位文本  | String  | false  | 请输入内容  |
 | rows  | 	文本域行数  | Number  | false  | 2  |
 | maxLength  | 	输入内容最大长度  | Number  | false  | 100  |
 
@@ -560,6 +571,7 @@ const pageRef = useRef()
 
 | 属性  | 说明  | 类型  | 是否必填  | 默认值  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
+| placeholder  | 站位文本  | String  | false  | 请选择内容  |
 | multiple  | 	是否多选  | Boolean  | false  | false  |
 | expandTrigger  | 	次级菜单的展开方式，可选 'click' 和 'hover'  | String  | false  | click  |
 | changeOnSelect  | （单选时生效）当此项为 true时，点选每级菜单选项值都会发生变化  | Boolean  | false  | false  |
