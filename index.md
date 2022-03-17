@@ -445,6 +445,9 @@ const pageRef = useRef()
 | 属性  | 说明  | 类型  | 是否必填  | 默认值  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | curdUrl  | restful风格接口地址  | String  | true  | ——  |
+| getMoreParams  | get请求携带其他参数  | Object  | false  | ——  |
+| postMoreParams | post请求携带其他参数 | Object  | false  | ——  |
+| putMoreParams  | put请求携带其他参数  | Object  | false  | ——  |
 | enableUrl  | 启用接口地址  | String  | false  | curdUrl+‘/start’  |
 | disabledUrl  | 禁用接口地址  | String  | false  | curdUrl+'/stop'  |
 
