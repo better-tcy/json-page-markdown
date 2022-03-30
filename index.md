@@ -33,7 +33,6 @@
 ## 配置示例代码
 
 ```javascript
-
 import React, { memo, useRef } from 'react'
 
 import { Button, Tag } from 'antd'
@@ -422,7 +421,6 @@ const OneOne = memo((props) => {
 })
 
 export default OneOne
-
 ```
 
 ## 展示
@@ -514,7 +512,7 @@ const pageRef = useRef()
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | type  | 组件类型  | String  | true  | ——  |
 | label  | 标签名称  | String  | true  | ——  |
-| field  | 后端交互字段  | String \| Array(rangePicker->['开始日期字段','结束日期字段'])  | true  | ——  |
+| field  | 后端交互字段  | String 或 Array(rangePicker->['开始日期字段','结束日期字段'])  | true  | ——  |
 | disabled  | 是否禁用  | Boolean  | false  | false  |
 | rules  | 校验规则，设置字段的校验逻辑 详见antd官网  | 	Rule[]  | false  | ——  |
 
@@ -568,7 +566,7 @@ const pageRef = useRef()
 | actionUrl  | 	上传的地址  | String  | true  | ——  |
 | headers  | 	上传的请求头  | Object  | false  | ——  |
 | accept  | 接受上传的文件类型 详见antd官网  | String  | false  |  ——  |
-| data  | 传所需额外参数或返回上传额外参数的方法  | Object \| (file) => object  | false  |  ——  |
+| data  | 传所需额外参数或返回上传额外参数的方法  | Object 或 (file) => object  | false  |  ——  |
 | listType  | 上传列表的内建样式，支持三种基本样式 text, picture 和 picture-card  | String  | false  |  picture  |
 
 **type = textArea**
@@ -594,12 +592,10 @@ const pageRef = useRef()
 ### 页面 && 表格 增加按钮权限
 
 ```javascript
-
   if (pageConfig.pageTableConfig) {
     // 页面 && 表格按钮权限 pageAuthorityArr来源于点击导航派发到页面对应的按钮权限数组
     pageConfig.pageTableConfig.pageAuthorityArr = pageAuthorityArr
   }
-  
 ```
 
 ### 添加其他按钮
@@ -607,7 +603,6 @@ const pageRef = useRef()
 **页面中其他按钮的回调函数**
 
 ```javascript
-
   const pageBtn1ClickFun = (tableSelectedRowKeys) => {
     console.log('表格中多选选中的数据', tableSelectedRowKeys)
 
@@ -616,13 +611,11 @@ const pageRef = useRef()
     // 更新表格数据
     pageRef.current.getTableData()
   }
-  
 ```
 
 **表格中其他按钮的回调函数**
 
 ```javascript
-
   const tableBtn1ClickFun = (record) => {
     console.log('行信息', record)
 
@@ -631,13 +624,11 @@ const pageRef = useRef()
     // 更新表格数据
     pageRef.current.getTableData()
   }
-  
 ```
 
 **页面中其他按钮**
 
 ```javascript
-
   const pageBtn1 = () => {
     // Page页其他按钮的权限 如果按钮权限数组pageAuthorityArr中存在'其他按钮'则显示此按钮
     if (btnAuthority(pageAuthorityArr, '其他按钮')) {
@@ -656,13 +647,11 @@ const pageRef = useRef()
       }
     }
   }
-  
 ```
 
 **表格中其他按钮**
 
 ```javascript
-
   const tableBtn1 = () => {
     // 表格中其他按钮的权限 可结合src\assets\data\menuData.js中数据 梳理逻辑
     if (btnAuthority(pageAuthorityArr, '其他按钮')) {
@@ -683,29 +672,129 @@ const pageRef = useRef()
       }
     }
   }
-  
 ```
 
 ```javascript
-
   if (pageConfig.pageTableConfig) {
     // Page页中其他按钮
     pageConfig.pageTableConfig.pageMoreButtonArr = [pageBtn1()]
-  
     // 表格中其他按钮
     pageConfig.pageTableConfig.tableMoreButtonArr = [tableBtn1()]
   }
-  
 ```
 
 ## 使用组件
 
 ```javascript
-
   return (
     <div>
       <Page onRef={pageRef} pageConfig={pageConfig}></Page>
     </div>
   )
-  
+```
+
+## PageModal单独使用
+
+## 示例代码
+
+```javascript
+import React, { memo, useState } from 'react';
+
+import { Button } from 'antd';
+
+import { PageModal } from 'page/children'
+
+
+const OneTwo = memo(() => {
+
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  /**
+   *  两种使用方法
+   *  一.自动交互
+   *    1.新增：传入saveUrl即可
+   *    2.修改：传入saveurl和itemId（行id）即可
+   *    3.查看：传入itemId modalTitle为查看即可
+   * 
+   *  二.手动交互 
+   *   1.新增：传入getFormDataFun函数 点击确定时回调 参数为表单获取数据
+   *   2.修改：传入getFormDataFun函数 传入formData回显数据 
+   *   3.传入formData回显数据 modalTitle修改为查看
+   **/
+
+  const pageModalConfig = {
+    // saveUrl: '/oneOne/',
+    // itemId: 1,
+    modalTitle: '查看',
+    modalItemArr: [
+      {
+        type: 'input',
+        label: '姓名',
+        field: 'name',
+        placeholder: '请输入姓名'
+      }
+    ],
+    formData: {
+      name: '哈哈哈'
+    },
+    getFormDataFun(formData) {
+      console.log(formData)
+    }
+  }
+
+  const showModalFun = () => {
+    setIsModalVisible(true)
+  }
+
+  const closeModalFun = (_, isRequestTableData) => {
+    setIsModalVisible(false)
+    // isRequestTableData 是否更新表格数据
+  }
+
+  return (
+    <div>
+      <Button type="primary" onClick={showModalFun}>打开弹窗</Button>
+      {isModalVisible && <PageModal isModalVisible={isModalVisible} pageModalConfig={pageModalConfig} closeModal={closeModalFun}></PageModal>}
+    </div>
+  );
+});
+
+export default OneTwo;
+```
+
+## 代码详解
+
+### 创建打开 \| 关闭弹窗控制条件
+
+```javascript
+ const [isModalVisible, setIsModalVisible] = useState(false)
+```
+
+### pageModalConfig（属性可继承）
+
+| 属性  | 说明  | 类型  | 是否必填  | 默认值  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| saveUrl  | 保存 或 回显的url 用于自动交互时使用  | String  | false  | ——  |
+| itemId  | 行id 用于自动交互时使用  | String 或 Number  | false  | ——  |
+| formData  | 回显时传入组件内的数据 用于手动交互时使用  | Object  | false  | ——  |
+| getFormDataFun  | 点击保存时回调的方法 参数为表单数据 用于手动交互时使用  | Function  | false  | ——  |
+
+### 关闭弹窗回调函数
+
+```javascript
+  const closeModalFun = (_, isRequestTableData) => {
+    setIsModalVisible(false)
+    // isRequestTableData 是否更新表格数据
+  }
+```
+
+## 使用组件
+
+```javascript
+  return (
+    <div>
+      <Button type="primary" onClick={showModalFun}>打开弹窗</Button>
+      {isModalVisible && <PageModal isModalVisible={isModalVisible} pageModalConfig={pageModalConfig} closeModal={closeModalFun}></PageModal>}
+    </div>
+  );
 ```
