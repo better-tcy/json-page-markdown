@@ -39,7 +39,7 @@ import { Button, Tag } from 'antd'
 
 import Page from '@/component/business-components/page/Page'
 
-import { btnAuthority } from 'page/utils'
+import { btnAuthorityFun } from 'page/utils'
 
 const OneOne = memo((props) => {
   // pageAuthorityArr来源于点击导航派发到页面对应的按钮权限数组
@@ -49,7 +49,7 @@ const OneOne = memo((props) => {
 
   const pageConfig = {
     pageRequestUrl: {
-      curdUrl: '/oneOne',
+      curdUrl: '/oneOne/',
       getMoreParams: {
         type: 1
       },
@@ -63,7 +63,7 @@ const OneOne = memo((props) => {
       // disabledUrl: '/oneOne/stop' // 默认值/oneOne/stop
     },
     pageTitleConfig: {
-      title: '测试page'
+      title: '配置生成页面'
     },
     pageSearchConfig: {
       // searchItemMarginRight: '50px',
@@ -92,7 +92,7 @@ const OneOne = memo((props) => {
       // actionColumnsWidth: 500, // 操作列的宽度 默认为500 如果表格列数较多，请给每个列添加宽度（columns中的每一项增加width属性）这样表格会增加横向滚动条，操作列悬浮固定在右侧
       columns: [
         {
-          title: '角色名称',
+          title: '用户名称',
           dataIndex: 'name',
           key: 'name',
           align: 'center'
@@ -119,16 +119,16 @@ const OneOne = memo((props) => {
       ],
       // 如果按钮权限不具体到表格行信息的时候 下面函数可不传 默认按钮都显示
       // 根据行数据 是否渲染 查看按钮
-      // accordingRowIsRenderCheckBtn(record) {
+      // accordingRowIsRenderCheckBtnFun(record) {
       //   // 返回值必须为true && false
 
       // },
       // 根据行数据 是否渲染 修改按钮
-      // accordingRowIsRenderUpdateBtn(record) {
+      // accordingRowIsRenderUpdateBtnFun(record) {
 
       // },
       // 根据行数据 是否渲染 删除按钮
-      accordingRowIsRenderRemoveBtn(record) {
+      accordingRowIsRenderRemoveBtnFun(record) {
         if (record.id === 1) {
           return false
         } else {
@@ -136,7 +136,7 @@ const OneOne = memo((props) => {
         }
       }
       // 根据行数据 是否渲染 启用停用
-      // accordingRowIsRenderEDBtn(record) {
+      // accordingRowIsRenderEDBtnFun(record) {
 
       // }
     },
@@ -349,7 +349,7 @@ const OneOne = memo((props) => {
     // 业务逻辑
 
     // 更新表格数据
-    // pageRef.current.getTableData()
+    // pageRef.current.getTableDataFun()
   }
 
   const tableBtn1ClickFun = (record) => {
@@ -359,12 +359,12 @@ const OneOne = memo((props) => {
     // 业务逻辑
 
     // 更新表格数据
-    pageRef.current.getTableData()
+    pageRef.current.getTableDataFun()
   }
 
-  const pageBtn1 = () => {
+  const renderPageBtn1Fun = () => {
     // Page页其他按钮的权限 如果按钮权限数组pageAuthorityArr中存在'其他按钮'则显示此按钮
-    if (btnAuthority(pageAuthorityArr, '其他按钮')) {
+    if (btnAuthorityFun(pageAuthorityArr, '其他按钮')) {
       return function (tableSelectedRowKeys) {
         // 返回的按钮 必须添加key属性
         return (
@@ -382,9 +382,9 @@ const OneOne = memo((props) => {
     }
   }
 
-  const tableBtn1 = () => {
+  const renderTableBtn1Fun = () => {
     // 表格中其他按钮的权限 可结合src\assets\data\menuData.js中数据 梳理逻辑
-    if (btnAuthority(pageAuthorityArr, '其他按钮')) {
+    if (btnAuthorityFun(pageAuthorityArr, '其他按钮')) {
       return function (record) {
         // 如果'其他按钮'和行信息有权限关联 可拿到record判断 是否返回按钮
         // 返回的按钮 必须添加key属性 table中的其他按钮最好使用字符串作为key值 避免和组件内部按钮key冲突
@@ -407,10 +407,10 @@ const OneOne = memo((props) => {
   // 添加其他按钮
   if (pageConfig.pageTableConfig) {
     // Page页中其他按钮
-    pageConfig.pageTableConfig.pageMoreButtonArr = [pageBtn1()]
+    pageConfig.pageTableConfig.pageMoreButtonArr = [renderPageBtn1Fun()]
 
     // 表格中其他按钮
-    pageConfig.pageTableConfig.tableMoreButtonArr = [tableBtn1()]
+    pageConfig.pageTableConfig.tableMoreButtonArr = [renderTableBtn1Fun()]
   }
 
   return (
@@ -484,10 +484,10 @@ const pageRef = useRef()
 | isShowActionColumns  | 是否显示操作列  | Boolean  | false  | true  |
 | actionColumnsWidth  | 操作列的宽度，如果表格列数较多，请给每个列添加宽度（columns中的每一项增加width属性）这样表格会增加横向滚动条，操作列悬浮固定在右侧  | Number  | false  | 500  |
 | columns  | 表格列的配置描述 详见antd官网  | ColumnsType[]  | true  | ——  |
-| accordingRowIsRenderCheckBtn  | 根据行数据 是否渲染 查看按钮  | (record) => boolean  | false  | () => true  |
-| accordingRowIsRenderUpdateBtn  | 根据行数据 是否渲染 修改按钮  | 	(record) => boolean  | false  | () => true |
-| accordingRowIsRenderRemoveBtn  | 根据行数据 是否渲染 删除按钮  | 	(record) => boolean | false  | () => true  |
-| accordingRowIsRenderEDBtn  | 根据行数据 是否渲染 启用停用  | 	(record) => boolean | false  | () => true |
+| accordingRowIsRenderCheckBtnFun  | 根据行数据 是否渲染 查看按钮  | (record) => boolean  | false  | () => true  |
+| accordingRowIsRenderUpdateBtnFun  | 根据行数据 是否渲染 修改按钮  | 	(record) => boolean  | false  | () => true |
+| accordingRowIsRenderRemoveBtnFun  | 根据行数据 是否渲染 删除按钮  | 	(record) => boolean | false  | () => true  |
+| accordingRowIsRenderEDBtnFun  | 根据行数据 是否渲染 启用停用  | 	(record) => boolean | false  | () => true |
 
 ### pageModalConfig
 
@@ -609,7 +609,7 @@ const pageRef = useRef()
     // 业务逻辑
 
     // 更新表格数据
-    pageRef.current.getTableData()
+    pageRef.current.getTableDataFun()
   }
 ```
 
@@ -622,17 +622,18 @@ const pageRef = useRef()
     // 业务逻辑
 
     // 更新表格数据
-    pageRef.current.getTableData()
+    pageRef.current.getTableDataFun()
   }
 ```
 
 **页面中其他按钮**
 
 ```javascript
-  const pageBtn1 = () => {
+  const renderPageBtn1Fun = () => {
     // Page页其他按钮的权限 如果按钮权限数组pageAuthorityArr中存在'其他按钮'则显示此按钮
-    if (btnAuthority(pageAuthorityArr, '其他按钮')) {
+    if (btnAuthorityFun(pageAuthorityArr, '其他按钮')) {
       return function (tableSelectedRowKeys) {
+        // 返回的按钮 必须添加key属性
         return (
           <Button
             key={1}
@@ -652,14 +653,15 @@ const pageRef = useRef()
 **表格中其他按钮**
 
 ```javascript
-  const tableBtn1 = () => {
+  const renderTableBtn1Fun = () => {
     // 表格中其他按钮的权限 可结合src\assets\data\menuData.js中数据 梳理逻辑
-    if (btnAuthority(pageAuthorityArr, '其他按钮')) {
+    if (btnAuthorityFun(pageAuthorityArr, '其他按钮')) {
       return function (record) {
         // 如果'其他按钮'和行信息有权限关联 可拿到record判断 是否返回按钮
+        // 返回的按钮 必须添加key属性 table中的其他按钮最好使用字符串作为key值 避免和组件内部按钮key冲突
         return (
           <Button
-            key={1}
+            key={'a'}
             type="text"
             style={{ color: 'rgb(250, 152, 35)' }}
             onClick={() => {
@@ -677,9 +679,10 @@ const pageRef = useRef()
 ```javascript
   if (pageConfig.pageTableConfig) {
     // Page页中其他按钮
-    pageConfig.pageTableConfig.pageMoreButtonArr = [pageBtn1()]
+    pageConfig.pageTableConfig.pageMoreButtonArr = [renderPageBtn1Fun()]
+
     // 表格中其他按钮
-    pageConfig.pageTableConfig.tableMoreButtonArr = [tableBtn1()]
+    pageConfig.pageTableConfig.tableMoreButtonArr = [renderTableBtn1Fun()]
   }
 ```
 
@@ -698,15 +701,13 @@ const pageRef = useRef()
 ## 示例代码
 
 ```javascript
-import React, { memo, useState } from 'react';
+import React, { memo, useState } from 'react'
 
-import { Button } from 'antd';
+import { Button } from 'antd'
 
 import { PageModal } from 'page/children'
 
-
 const OneTwo = memo(() => {
-
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   /**
@@ -715,17 +716,17 @@ const OneTwo = memo(() => {
    *    1.新增：传入saveUrl即可
    *    2.修改：传入saveurl和itemId（行id）即可
    *    3.查看：传入itemId modalTitle为查看即可
-   * 
-   *  二.手动交互 
+   *
+   *  二.手动交互
    *   1.新增：传入getFormDataFun函数 点击确定时回调 参数为表单获取数据
-   *   2.修改：传入getFormDataFun函数 传入formData回显数据 
+   *   2.修改：传入getFormDataFun函数 传入formData回显数据
    *   3.传入formData回显数据 modalTitle修改为查看
    **/
 
   const pageModalConfig = {
-    // saveUrl: '/oneOne/',
-    // itemId: 1,
-    modalTitle: '查看',
+    saveUrl: '/oneOne/',
+    itemId: 1,
+    modalTitle: '新增',
     modalItemArr: [
       {
         type: 'input',
@@ -753,13 +754,21 @@ const OneTwo = memo(() => {
 
   return (
     <div>
-      <Button type="primary" onClick={showModalFun}>打开弹窗</Button>
-      {isModalVisible && <PageModal isModalVisible={isModalVisible} pageModalConfig={pageModalConfig} closeModal={closeModalFun}></PageModal>}
+      <Button type="primary" onClick={showModalFun}>
+        打开弹窗
+      </Button>
+      {isModalVisible && (
+        <PageModal
+          isModalVisible={isModalVisible}
+          pageModalConfig={pageModalConfig}
+          onCloseModal={closeModalFun}
+        ></PageModal>
+      )}
     </div>
-  );
-});
+  )
+})
 
-export default OneTwo;
+export default OneTwo
 ```
 
 ## 代码详解
@@ -793,8 +802,16 @@ export default OneTwo;
 ```javascript
   return (
     <div>
-      <Button type="primary" onClick={showModalFun}>打开弹窗</Button>
-      {isModalVisible && <PageModal isModalVisible={isModalVisible} pageModalConfig={pageModalConfig} closeModal={closeModalFun}></PageModal>}
+      <Button type="primary" onClick={showModalFun}>
+        打开弹窗
+      </Button>
+      {isModalVisible && (
+        <PageModal
+          isModalVisible={isModalVisible}
+          pageModalConfig={pageModalConfig}
+          onCloseModal={closeModalFun}
+        ></PageModal>
+      )}
     </div>
-  );
+  )
 ```
