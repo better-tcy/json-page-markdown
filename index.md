@@ -392,7 +392,6 @@ const OneOne = memo((props) => {
           <Button
             key={'a'}
             type="text"
-            style={{ color: 'rgb(250, 152, 35)' }}
             onClick={() => {
               tableBtn1ClickFun(record)
             }}
@@ -663,7 +662,6 @@ const pageRef = useRef()
           <Button
             key={'a'}
             type="text"
-            style={{ color: 'rgb(250, 152, 35)' }}
             onClick={() => {
               tableBtn1ClickFun(record)
             }}
