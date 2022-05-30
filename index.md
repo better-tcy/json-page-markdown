@@ -475,7 +475,7 @@ const pageRef = useRef()
 | 属性  | 说明  | 类型  | 是否必填  | 默认值  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | pageRequestUrl  | 配置请求接口  | Object  | true  | ——  |
-| pageTitleConfig  | 配置页面标题  | Object  | true  | ——  |
+| pageTitleConfig  | 配置页面标题  | Object  | false  | ——  |
 | pageSearchConfig  | 配置搜索区域  | Object  | false  | ——  |
 | pageTableConfig  | 配置表格  | Object  | true  | ——  |
 | pageModalConfig  | 配置弹窗  | Object  | false  | ——  |
