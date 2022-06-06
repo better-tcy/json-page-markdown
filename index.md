@@ -90,6 +90,7 @@ const OneOne = memo((props) => {
           customizeOptionsLabelKey: 'name',
           url: '/firstSelectData/',
           requestKey: 'programmingLanguage',
+          requestValue: 10,
           rules: [],
         },
         {
@@ -516,7 +517,7 @@ const pageRef = useRef()
 | customizeOptionsLabelKey  | 自定义 options 中 的label字段  | String  | false  | label  |
 | url  | 获取下拉框数据的接口  | String  | true  | ——  |
 | requestKey  | 获取此项下拉框数据时给此项接口传入的key名 值是上个联动输入框选中的值（若是第一个联动下拉框数据 值为requestValue的value） | String  | 第一个联动下拉框为false 其他为true  | ——  |
-| requestValue（只有第一个联动下拉框才有的属性）  | 获取此项下拉框数据时传入的值 | String  | false  | ——  |
+| requestValue（只有第一个联动下拉框才有的属性）  | 获取第一个下拉框数据时传入的值 | String  | false  | ——  |
 | rules  | 校验规则，设置字段的校验逻辑 详见antd官网  | Rule[]  | false  | ——  |
 
 ### pageTableConfig
