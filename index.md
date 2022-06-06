@@ -515,7 +515,7 @@ const pageRef = useRef()
 | customizeOptionsValueKey  | 自定义 options 中 的value字段  | String  | false  | value  |
 | customizeOptionsLabelKey  | 自定义 options 中 的label字段  | String  | false  | label  |
 | url  | 获取下拉框数据的接口  | String  | true  | ——  |
-| requestKey  | 获取子下拉框数据时给子输入框接口传入的key名 值是当前输入框选中的值 | String  | false  | children  |
+| requestKey  | 获取此项下拉框数据时给此项接口传入的key名 值是上个联动输入框选中的值 | String  | false  | children  |
 | rules  | 自定义 options 中 的children字段  | String  | false  | children  |
 
 ### pageTableConfig
