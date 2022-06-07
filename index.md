@@ -505,6 +505,8 @@ const pageRef = useRef()
 | searchItemMarginRight  | 搜索区域每一项右边距  | String  | false  | 28px  |
 | searchItemArr  | 搜索区域每一项组成的数组  | Object[]  | true  | ——  |
 | connectedSelectArr  | 搜索区域下拉框数据联动数组  | Object[]  | false  | ——  |
+| getSearchDataFun  | 点击搜索按钮时的回调方法（参数：搜索区域数据） | Function  | false（PageSearch单独使用时为true）  | ——  |
+| resetSearchDataFun  | 点击重置按钮时的回调方法  | Function | false（PageSearch单独使用时为true）  | ——  |
 
 ### connectedSelectAr -> Object
 
@@ -891,10 +893,10 @@ const OneThree = memo(() => {
         placeholder: '请输入手机号',
       },
     ],
-    getSearchValuesFun(values) {
+    getSearchDataFun(values) {
       console.log('搜索栏数据', values)
     },
-    resetSearchValuesFun() {
+    resetSearchDataFun() {
       console.log('点击重置按钮')
     },
   }
@@ -911,12 +913,7 @@ export default OneThree;
 
 ## 代码详解
 
-### pageSearchConfig（page->pageSearchConfig中其他属性也可用）
-
-| 属性  | 说明  | 类型  | 是否必填  | 默认值  |
-| ------------ | ------------ | ------------ | ------------ | ------------ |
-| getSearchValuesFun  | 点击搜索按钮的回调方法（参数：搜索区域数据）  | Function  | true  | ——  |
-| resetSearchValuesFun  | 点击重置按钮的回调方法 | Function  | true  | ——  |
+### pageSearchConfig（page->pageSearchConfig中属性都可用）
 
 ## 使用组件
 
