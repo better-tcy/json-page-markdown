@@ -827,7 +827,7 @@ export default OneTwo
  const [isModalVisible, setIsModalVisible] = useState(false)
 ```
 
-### pageModalConfig（属性可继承）
+### pageModalConfig（page->pageModalConfig中其他属性也可用）
 
 | 属性  | 说明  | 类型  | 是否必填  | 默认值  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
@@ -860,6 +860,70 @@ export default OneTwo
           onCloseModal={closeModalFun}
         ></PageModal>
       )}
+    </div>
+  )
+```
+
+## PageSearch单独使用
+
+## 示例代码
+
+```javascript
+import React, { memo } from 'react';
+
+import { PageSearch } from 'page/children'
+
+const OneThree = memo(() => {
+
+  const pageSearchConfig = {
+    // searchItemMarginRight: '50px',
+    searchItemArr: [
+      {
+        type: 'input',
+        label: '姓名',
+        field: 'name',
+        placeholder: '请输入姓名',
+      },
+      {
+        type: 'input',
+        label: '手机号',
+        field: 'phone',
+        placeholder: '请输入手机号',
+      },
+    ],
+    getSearchValuesFun(values) {
+      console.log('搜索栏数据', values)
+    },
+    resetSearchValuesFun() {
+      console.log('点击重置按钮')
+    },
+  }
+
+  return (
+    <div>
+      <PageSearch pageSearchConfig={pageSearchConfig}></PageSearch>
+    </div>
+  );
+});
+
+export default OneThree;
+```
+
+## 代码详解
+
+### pageSearchConfig（page->pageSearchConfig中其他属性也可用）
+
+| 属性  | 说明  | 类型  | 是否必填  | 默认值  |
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+| getSearchValuesFun  | 点击搜索按钮的回调方法（参数：搜索区域数据）  | Function  | true  | ——  |
+| resetSearchValuesFun  | 点击重置按钮的回调方法 | Function  | true  | ——  |
+
+## 使用组件
+
+```javascript
+  return (
+    <div>
+      <PageSearch pageSearchConfig={pageSearchConfig}></PageSearch>
     </div>
   )
 ```
