@@ -508,7 +508,7 @@ const pageRef = useRef()
 | searchItemMarginRight  | 搜索区域每一项右边距  | String  | false  | 28px  |
 | searchItemArr  | 搜索区域每一项组成的数组  | Object[]  | true  | ——  |
 | connectedSelectArr  | 搜索区域下拉框数据联动数组  | Object[]  | false  | ——  |
-| defaultSearchData  | 默认搜索的数据（联动下拉框不可用）  | Object[]  | false  | ——  |
+| defaultSearchData  | 默认搜索的数据（联动下拉框第一个也可用）  | Object[]  | false  | ——  |
 | getSearchDataFun  | 点击搜索按钮时的回调方法（参数：搜索区域数据） | Function  | false（PageSearch单独使用时为true）  | ——  |
 | resetSearchDataFun  | 点击重置按钮时的回调方法  | Function | false（PageSearch单独使用时为true）  | ——  |
 
