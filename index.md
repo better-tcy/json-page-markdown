@@ -769,8 +769,8 @@ const OneTwo = memo(() => {
    *
    *  二.手动交互
    *   1.新增：传入getFormDataFun函数 点击确定时回调 参数为表单获取数据
-   *   2.修改：传入getFormDataFun函数 传入formData回显数据
-   *   3.查看：传入formData回显数据 modalTitle修改为查看
+   *   2.修改：传入getFormDataFun函数 传入defaultFormData回显数据
+   *   3.查看：传入defaultFormData回显数据 modalTitle修改为查看
    **/
 
   const pageModalConfig = {
@@ -785,7 +785,7 @@ const OneTwo = memo(() => {
         placeholder: '请输入姓名'
       }
     ],
-    formData: {
+    defaultFormData: {
       name: '哈哈哈'
     },
     getFormDataFun(formData) {
@@ -829,13 +829,13 @@ export default OneTwo
  const [isModalVisible, setIsModalVisible] = useState(false)
 ```
 
-### pageModalConfig（page->pageModalConfig中其他属性也可用）
+### pageModalConfig（page->pageModalConfig中其他属性都可用）
 
 | 属性  | 说明  | 类型  | 是否必填  | 默认值  |
 | ------------ | ------------ | ------------ | ------------ | ------------ |
 | saveUrl  | 保存 或 回显的url 用于自动交互时使用  | String  | false  | ——  |
 | itemId  | 行id 用于自动交互时使用  | String 或 Number  | false  | ——  |
-| formData  | 回显时传入组件内的数据 用于手动交互时使用  | Object  | false  | ——  |
+| defaultFormData  | 回显时传入组件内的数据 用于手动交互时使用  | Object  | false  | ——  |
 | getFormDataFun  | 点击保存时回调的方法 参数为表单数据 用于手动交互时使用  | Function  | false  | ——  |
 
 ### 关闭弹窗回调函数
