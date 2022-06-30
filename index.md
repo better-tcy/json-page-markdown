@@ -32,7 +32,9 @@
 
 <details>
 <summary> 配置示例代码 </summary>
-
+  
+```javascript
+  
 import React, { memo, useRef } from 'react'
 
 import { Button, Tag } from 'antd'
@@ -463,7 +465,8 @@ const OneOne = memo((props) => {
 })
 
 export default OneOne
-
+  
+```
 </details>
 
 ## 展示
