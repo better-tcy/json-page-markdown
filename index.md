@@ -1,6 +1,6 @@
 ##  介绍
 
-**这是一个可以通过JSON配置就可生成页面的组件，可具有更高的开发便捷性即维护性。**
+**这是一个可以通过JS对象配置就可生成页面的组件，可具有更高的开发便捷性即维护性。**
 
 ## 为什么要做这个组件？
 
@@ -30,7 +30,8 @@
 
 **注：通用功能会慢慢集成进来 复杂功能或复杂业务的页面最好单独开发**
 
-## 配置示例代码
+<details>
+<summary> 配置示例代码 </summary>
 
 ```javascript
 import React, { memo, useRef } from 'react'
@@ -119,13 +120,19 @@ const OneOne = memo((props) => {
       }
     },
     pageTableConfig: {
-      // isShowAddBtn: false, // 默认都为true
+      // 默认都为true
+      // isShowAddBtn: false,
       // isShowCheckDetailsBtn: false,
       // isShowUpdateBtn: false,
       // isShowRemoveBtn: false,
       // isShowEnableDisableBtn: false,
       // isShowActionColumns: false,
-      // actionColumnsWidth: 500, // 操作列的宽度 默认为500 如果表格列数较多，请给每个列添加宽度（columns中的每一项增加width属性）这样表格会增加横向滚动条，操作列悬浮固定在右侧
+      // 操作列的宽度 默认为500 如果表格列数较多，
+      // 请给每个列添加宽度（columns中的每一项增加width属性）这样表格会增加横向滚动条，操作列悬浮固定在右侧
+      // 如果isShowActionColumns为false又想出现横向滚动条的话 可以给columns中其他属性添加fixed属性（详见antd官网）
+      // actionColumnsWidth: 500,
+      // 表格是否可滚动，也可以指定滚动区域的宽、高（详见antd官网）
+      scroll: { y: 360 },
       columns: [
         {
           title: '用户名称',
@@ -459,6 +466,7 @@ const OneOne = memo((props) => {
 export default OneOne
 
 ```
+</details>
 
 ## 展示
 
@@ -537,7 +545,8 @@ const pageRef = useRef()
 | isShowEnableDisableBtn  | 是否显示启用禁用按钮  | Boolean  | false  | true  |
 | isShowEnableDisableBtn  | 是否显示启用禁用按钮  | Boolean  | false  | true  |
 | isShowActionColumns  | 是否显示操作列  | Boolean  | false  | true  |
-| actionColumnsWidth  | 操作列的宽度，如果表格列数较多，请给每个列添加宽度（columns中的每一项增加width属性）这样表格会增加横向滚动条，操作列悬浮固定在右侧  | Number  | false  | 500  |
+| actionColumnsWidth  | 操作列的宽度，如果表格列数较多，请给每个列添加宽度（columns中的每一项增加width属性）这样表格会增加横向滚动条，操作列悬浮固定在右侧，如果isShowActionColumns为false又想出现横向滚动条的话 可以给columns中其他属性添加fixed属性（详见antd官网）  | Number  | false  | 500  |
+| scroll  | 表格是否可滚动，也可以指定滚动区域的宽、高（详见antd官网）  | Object  | false  | { x: 1500, y: 490 } |
 | columns  | 表格列的配置描述 详见antd官网  | ColumnsType[]  | true  | ——  |
 | accordingRowIsRenderCheckBtnFun  | 根据行数据 是否渲染 查看按钮  | (record) => boolean  | false  | () => true  |
 | accordingRowIsRenderUpdateBtnFun  | 根据行数据 是否渲染 修改按钮  | 	(record) => boolean  | false  | () => true |
