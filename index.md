@@ -30,7 +30,7 @@
 
 **注：通用功能会慢慢集成进来 复杂功能或复杂业务的页面最好单独开发**
 
-## 配置示例代码请查看/src/view/content/one/one-one/OneOne.js
+## 配置示例代码请查看src/view/content/use-components/use-page/UsePage.js
 
 ## 展示
 
